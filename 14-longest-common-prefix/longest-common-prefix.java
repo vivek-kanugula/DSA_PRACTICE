@@ -2,13 +2,13 @@ class Solution {
     public String longestCommonPrefix(String[] strs) {
         
         String pre = strs[0];
-        for(int i=1;i<strs.length;i++)
+        for(int i=0;i<pre.length();i++)
         {
-            while(strs[i].indexOf(pre) != 0)
+            char current = pre.charAt(i);
+            for(int word=1;word<strs.length;word++)
             {
-                pre = pre.substring(0,pre.length()-1);
-                if(pre.isEmpty())
-                    return "";
+                if(i >= strs[word].length() || strs[word].charAt(i) != current)
+                    return pre.substring(0,i);
             }
         }
         return pre;
