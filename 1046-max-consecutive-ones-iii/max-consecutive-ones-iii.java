@@ -6,13 +6,13 @@ class Solution {
         {
             if(nums[j] == 0)
             k--;
-            while(k < 0)
+            if(k < 0)
             {
                 if(nums[i] == 0)
                     k++;
                 i++;
             }
-            if(i <= j)
+            if(k >= 0)
             max = Math.max(max , j-i+1);
             j++;
         }
