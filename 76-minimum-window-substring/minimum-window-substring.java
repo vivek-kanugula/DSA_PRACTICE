@@ -1,40 +1,29 @@
 class Solution {
     public String minWindow(String s, String t) {
-        
-        int i = 0 , j = 0, n = s.length() , min = 100000 ;
-        String str = "";
-        int[] sf = new int[58];
-        int[] tf = new int[58];
 
-        for(int x=0;x<t.length();x++)
-            tf[t.charAt(x)-'A']++;
-        while(j < n)
-        {
-            sf[s.charAt(j)-'A']++;
-            while(check(sf , tf))
-            {
-                 if(min > j-i+1)
-                 {
+        int i = 0, j = 0, n = s.length(), m = t.length(), min = 100000, cnt = 0 , target = 0;
+        String str = "";
+        HashMap<Character, Integer> hm = new HashMap<>();
+        for (int x = 0; x < m; x++)
+            hm.put(t.charAt(x), hm.getOrDefault(t.charAt(x), 0) + 1);
+        target = hm.size();
+        while (j < n) {
+            hm.put(s.charAt(j) , hm.getOrDefault(s.charAt(j),0)-1);
+            if(hm.get(s.charAt(j)) == 0)
+                cnt++;
+            while(cnt == target){
+                if((j-i+1) < min){
                     min = j-i+1;
                     str = s.substring(i,j+1);
-                 }
-                 sf[s.charAt(i)-'A']--;
-                 i++;
+                }
+                hm.put(s.charAt(i) , hm.get(s.charAt(i))+1);
+                if(hm.get(s.charAt(i)) > 0)
+                    cnt--;
+                i++;
             }
             j++;
         }
         return str;
     }
 
-    public boolean check(int[] sf , int[] tf)
-    {
-        for(int i=0;i<58;i++)
-        {
-            if(tf[i] > sf[i])
-                return false;
-        }
-
-         return true;
-    }
-   
 }
