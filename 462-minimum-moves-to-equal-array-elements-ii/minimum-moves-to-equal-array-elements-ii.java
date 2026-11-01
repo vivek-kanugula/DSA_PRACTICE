@@ -5,7 +5,7 @@ class Solution {
         Arrays.sort(nums);
         for(int i=0;i<n;i++)
         {
-            total += Math.abs(nums[i]-nums[n/2]);
+            total += Math.abs(nums[i]-nums[(n-1)/2]);
         }
         return total;
     }
