@@ -3,17 +3,15 @@ class Solution {
         
         if(x == 0)
             return 0;
-        else if(n == 0)
+        if(x == 1 || n == 0)
             return 1;
-        else if(n == 1)
-            return x;
         double ans = 1;
         long nn = n;
-        if(n < 0)
+        if(nn < 0)
             nn = -nn;
         while(nn > 0)
         {
-            if(nn%2 == 0)
+            if(nn % 2 == 0)
             {
                 x *= x;
                 nn /= 2;
@@ -24,8 +22,7 @@ class Solution {
                 nn--;
             }
         }
-        if(n <= 0)
-            return 1.0/ans;
-        return ans;
+
+        return n > 0 ? ans : 1.0/ans;
     }
 }
